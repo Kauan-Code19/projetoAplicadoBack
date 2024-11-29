@@ -35,6 +35,7 @@ public class Collect {
     @Column(name = "shift", nullable = false)
     private Shift shift;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "day_of_week", nullable = false)
     private DayOfWeek dayOfWeek;
 
