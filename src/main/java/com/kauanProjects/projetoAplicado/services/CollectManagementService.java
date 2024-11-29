@@ -3,10 +3,13 @@ package com.kauanProjects.projetoAplicado.services;
 import com.kauanProjects.projetoAplicado.dtos.CollectDTO;
 import com.kauanProjects.projetoAplicado.dtos.CollectResponseDTO;
 import com.kauanProjects.projetoAplicado.entities.Collect;
+import com.kauanProjects.projetoAplicado.entities.District;
 import com.kauanProjects.projetoAplicado.repositories.CollectRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class CollectManagementService {
@@ -34,5 +37,11 @@ public class CollectManagementService {
     @Transactional
     private void saveCollectInDatabase(Collect collect) {
         collectRepository.save(collect);
+    }
+
+
+    @Transactional(readOnly = true)
+    public List<Collect> fetchCollectsByDistrict(District district) {
+        return collectRepository.findAllByDistrict(district);
     }
 }

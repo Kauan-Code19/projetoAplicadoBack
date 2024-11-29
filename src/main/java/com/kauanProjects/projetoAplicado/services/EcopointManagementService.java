@@ -4,9 +4,9 @@ import com.kauanProjects.projetoAplicado.dtos.EcopointDTO;
 import com.kauanProjects.projetoAplicado.dtos.EcopointResponseDTO;
 import com.kauanProjects.projetoAplicado.entities.Ecopoint;
 import com.kauanProjects.projetoAplicado.repositories.EcopointRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class EcopointManagementService {
