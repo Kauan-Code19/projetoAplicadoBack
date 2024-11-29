@@ -35,11 +35,15 @@ public class Collect {
     @Column(name = "shift", nullable = false)
     private Shift shift;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "day_of_week", nullable = false)
     private DayOfWeek dayOfWeek;
 
     @Column(name = "schedule", nullable = false)
     private LocalTime schedule;
+
+    @Column(name = "number_of_schedules")
+    private Long numberOfSchedules;
 
     @ManyToOne
     @JoinColumn(name = "district_id", nullable = false)
