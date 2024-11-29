@@ -3,6 +3,7 @@ package com.kauanProjects.projetoAplicado.controllers;
 import com.kauanProjects.projetoAplicado.dtos.CollectResponseDTO;
 import com.kauanProjects.projetoAplicado.dtos.DistrictDTO;
 import com.kauanProjects.projetoAplicado.dtos.DistrictResponseDTO;
+import com.kauanProjects.projetoAplicado.dtos.EcopointResponseDTO;
 import com.kauanProjects.projetoAplicado.services.DistrictManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -47,11 +48,23 @@ public class DistrictRestController {
     }
 
 
-    @GetMapping
-    public ResponseEntity<List<CollectResponseDTO>> callDistrictManagementServiceForFetchCollections
+    @GetMapping("/collections")
+    public ResponseEntity<List<CollectResponseDTO>> callDistrictManagementServiceForFetchCollectionsByDistrict
             (@RequestBody DistrictDTO districtDTO) {
-        List<CollectResponseDTO> collectResponseDTOS = districtManagementService.fetchCollections(districtDTO);
+
+        List<CollectResponseDTO> collectResponseDTOS = districtManagementService
+                .fetchCollectionsByDistrict(districtDTO);
 
         return ResponseEntity.ok(collectResponseDTOS);
+    }
+
+    @GetMapping("/ecopoints")
+    public ResponseEntity<List<EcopointResponseDTO>> callDistrictManagementServiceForFetchEcopointsByDistrict
+            (@RequestBody DistrictDTO districtDTO) {
+
+        List<EcopointResponseDTO> ecopointResponseDTOS = districtManagementService
+                .fetchEcopointsByDistrict(districtDTO);
+
+        return ResponseEntity.ok(ecopointResponseDTOS);
     }
 }

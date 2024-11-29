@@ -3,8 +3,10 @@ package com.kauanProjects.projetoAplicado.services;
 import com.kauanProjects.projetoAplicado.dtos.CollectResponseDTO;
 import com.kauanProjects.projetoAplicado.dtos.DistrictDTO;
 import com.kauanProjects.projetoAplicado.dtos.DistrictResponseDTO;
+import com.kauanProjects.projetoAplicado.dtos.EcopointResponseDTO;
 import com.kauanProjects.projetoAplicado.entities.Collect;
 import com.kauanProjects.projetoAplicado.entities.District;
+import com.kauanProjects.projetoAplicado.entities.Ecopoint;
 import com.kauanProjects.projetoAplicado.repositories.DistrictRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +19,15 @@ public class DistrictManagementService {
 
     private final DistrictRepository districtRepository;
     private final CollectManagementService collectManagementService;
+    private final EcopointManagementService ecopointManagementService;
 
     @Autowired
     public DistrictManagementService(DistrictRepository districtRepository,
-                                     CollectManagementService collectManagementService) {
+                                     CollectManagementService collectManagementService,
+                                     EcopointManagementService ecopointManagementService) {
         this.districtRepository = districtRepository;
         this.collectManagementService = collectManagementService;
+        this.ecopointManagementService = ecopointManagementService;
     }
 
 
@@ -42,7 +47,7 @@ public class DistrictManagementService {
     }
 
 
-    public List<CollectResponseDTO> fetchCollections(DistrictDTO districtDTO) {
+    public List<CollectResponseDTO> fetchCollectionsByDistrict(DistrictDTO districtDTO) {
         List<Collect> collects = collectManagementService
                 .fetchCollectsByDistrict(fetchDistrictByName(districtDTO.name()));
 
@@ -53,5 +58,13 @@ public class DistrictManagementService {
     @Transactional(readOnly = true)
     private District fetchDistrictByName(String districtName) {
         return districtRepository.findByName(districtName);
+    }
+
+
+    public List<EcopointResponseDTO> fetchEcopointsByDistrict(DistrictDTO districtDTO) {
+        List<Ecopoint> ecopoints = ecopointManagementService
+                .fetchEcopointsByDistrict(fetchDistrictByName(districtDTO.name()));
+
+        return ecopoints.stream().map(EcopointResponseDTO::new).toList();
     }
 }
