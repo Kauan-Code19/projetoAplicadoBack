@@ -42,6 +42,9 @@ public class Collect {
     @Column(name = "schedule", nullable = false)
     private LocalTime schedule;
 
+    @Column(name = "number_of_schedules")
+    private Long numberOfSchedules;
+
     @ManyToOne
     @JoinColumn(name = "district_id", nullable = false)
     private District district;

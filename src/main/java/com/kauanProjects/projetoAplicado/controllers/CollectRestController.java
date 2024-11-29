@@ -6,6 +6,7 @@ import com.kauanProjects.projetoAplicado.services.CollectManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,5 +41,13 @@ public class CollectRestController {
                 .path("/{id}")
                 .buildAndExpand(collectResponseDTO.getId())
                 .toUri();
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> callCollectManagementServiceUpdateScheduleByDistrictAndDayWeek(
+            @RequestBody CollectDTO collectDTO) {
+        collectManagementService.updateScheduleByDistrictAndDayWeek(collectDTO);
+
+        return ResponseEntity.noContent().build();
     }
 }
