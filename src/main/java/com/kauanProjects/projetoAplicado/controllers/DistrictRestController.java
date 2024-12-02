@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
@@ -50,7 +51,7 @@ public class DistrictRestController {
 
     @GetMapping("/collections")
     public ResponseEntity<List<CollectResponseDTO>> callDistrictManagementServiceForFetchCollectionsByDistrict
-            (@RequestBody DistrictDTO districtDTO) {
+            (@RequestParam DistrictDTO districtDTO) {
 
         List<CollectResponseDTO> collectResponseDTOS = districtManagementService
                 .fetchCollectionsByDistrict(districtDTO);
@@ -58,13 +59,22 @@ public class DistrictRestController {
         return ResponseEntity.ok(collectResponseDTOS);
     }
 
+
     @GetMapping("/ecopoints")
     public ResponseEntity<List<EcopointResponseDTO>> callDistrictManagementServiceForFetchEcopointsByDistrict
-            (@RequestBody DistrictDTO districtDTO) {
+            (@RequestParam DistrictDTO districtDTO) {
 
         List<EcopointResponseDTO> ecopointResponseDTOS = districtManagementService
                 .fetchEcopointsByDistrict(districtDTO);
 
         return ResponseEntity.ok(ecopointResponseDTOS);
+    }
+
+
+    @GetMapping("/all")
+    public ResponseEntity<List<DistrictResponseDTO>> callDistrictManagementServiceForFetchAllDistricts() {
+        List<DistrictResponseDTO> districtResponseDTOS = districtManagementService.fetchAllDistricts();
+
+        return ResponseEntity.ok(districtResponseDTOS);
     }
 }

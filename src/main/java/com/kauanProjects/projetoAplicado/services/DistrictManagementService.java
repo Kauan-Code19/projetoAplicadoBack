@@ -67,4 +67,12 @@ public class DistrictManagementService {
 
         return ecopoints.stream().map(EcopointResponseDTO::new).toList();
     }
+
+
+    @Transactional(readOnly = true)
+    public List<DistrictResponseDTO> fetchAllDistricts() {
+        List<District> districts = districtRepository.findAll();
+
+        return districts.stream().map(DistrictResponseDTO::new).toList();
+    }
 }

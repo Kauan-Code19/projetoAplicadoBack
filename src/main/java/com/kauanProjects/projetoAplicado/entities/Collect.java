@@ -2,6 +2,7 @@ package com.kauanProjects.projetoAplicado.entities;
 
 import com.kauanProjects.projetoAplicado.enums.Shift;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -35,7 +36,7 @@ public class Collect {
     @Column(name = "shift", nullable = false)
     private Shift shift;
 
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = DayOfWeekConverter.class)
     @Column(name = "day_of_week", nullable = false)
     private DayOfWeek dayOfWeek;
 
