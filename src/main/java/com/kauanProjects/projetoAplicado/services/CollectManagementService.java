@@ -53,6 +53,11 @@ public class CollectManagementService {
         Collect collect = fetchCollectByDistrictAndDayOfWeekAndShift(collectDTO.getDistrict(),
                 collectDTO.getDayOfWeek(), collectDTO.getShift());
 
+        if (collect == null) {
+            createCollect(collectDTO);
+            return;
+        }
+
         Long newScheduleInMinutes = convertScheduleToMinutes(collectDTO.getSchedule());
         Long oldScheduleInMinutes = convertScheduleToMinutes(collect.getSchedule());
 
