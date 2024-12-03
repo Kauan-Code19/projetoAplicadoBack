@@ -7,7 +7,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,8 +31,8 @@ public class District {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToOne(mappedBy = "district")
-    private Ecopoint ecopoint;
+    @OneToMany(mappedBy = "district", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ecopoint> ecopoints = new ArrayList<>();
 
     @OneToMany(mappedBy = "district", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Collect> collects = new ArrayList<>();

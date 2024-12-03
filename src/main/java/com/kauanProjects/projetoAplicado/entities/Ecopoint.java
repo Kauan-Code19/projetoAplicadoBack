@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +29,7 @@ public class Ecopoint {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "district_id", referencedColumnName = "id", nullable = false)
     private District district;
 }
